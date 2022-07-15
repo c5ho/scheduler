@@ -99,10 +99,12 @@ storiesOf("Button", module)
       ))
       .add("Clickable", () => (
         <InterviewerListItem
-          id={interviewer.id}
+          // no long need id pass down to InterviewerListItem after prop drilling
+          //id={interviewer.id}
           name={interviewer.name}
           avatar={interviewer.avatar}
-          setInterviewer={action("setInterviewer")}
+          // setInterviewer={action("setInterviewer")}
+          setInterviewer={() => action("setInterviewer")(interviewer.id)}
         />
       ));
 

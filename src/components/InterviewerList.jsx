@@ -11,13 +11,16 @@ export default function InterviewerList(props) {
         {props.interviewers.map((interviewer) =>
           <InterviewerListItem
             key={interviewer.id}
-            //we need the interviewer id as InterviewerListItem uses the id for setInterviewer(props.id)
-            id={interviewer.id}
+            // we need the interviewer id as InterviewerListItem uses the id for setInterviewer(props.id)
+            // After prop-drilling, no longer need to pass down interviewer.id as prop
+            // id={interviewer.id}
             name={interviewer.name}
             avatar={interviewer.avatar}
-            //interviewer selected is passed in as an id called "interviewer" hence, must compare interviwer.id to props.interviewer
+            // interviewer selected is passed in as an id called "interviewer" hence, must compare interviwer.id to props.interviewer
             selected={interviewer.id === props.interviewer} 
-            setInterviewer={props.setInterviewer}
+            // After prop-drilling setting the setInterviewer function instead of passing only a reference
+            // setInterviewer={props.setInterviewer}
+            setInterviewer={() => props.setInterviewer(interviewer.id)}
           />
         )}
       </ul>

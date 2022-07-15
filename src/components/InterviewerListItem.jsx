@@ -9,7 +9,9 @@ console.log(props);
   })
   
   return (
-    <li className={interviewerClass} onClick={() => props.setInterviewer(props.id)}>
+    // After prop-drilling, function setInterviewer executes in InterviewerList and here called only as a reference
+    // <li className={interviewerClass} onClick={() => props.setInterviewer(props.id)}>
+    <li className={interviewerClass} onClick={props.setInterviewer}>
     <img
       className="interviewers__item-image"
       src={props.avatar}
