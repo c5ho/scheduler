@@ -34,12 +34,13 @@ export default function Application(props) {
           alt="Interview Scheduler"
         />
         <hr className="sidebar__separator sidebar--centered" />
-        <nav className="sidebar__menu"></nav>
-        <DayList
-          days={days}
-          day={day}
-          setDay={setDay}
-        />
+        <nav className="sidebar__menu">
+          <DayList
+            days={days}
+            day={day}
+            setDay={setDay}
+          />
+        </nav>
         <img
           className="sidebar__lhl sidebar--centered"
           src="images/lhl.png"
