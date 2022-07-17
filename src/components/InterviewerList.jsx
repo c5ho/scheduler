@@ -17,9 +17,10 @@ export default function InterviewerList(props) {
             name={interviewer.name}
             avatar={interviewer.avatar}
             // interviewer selected is passed in as an id called "interviewer" hence, must compare interviwer.id to props.interviewer
-            selected={interviewer.id === props.value} 
+            selected={interviewer.id === props.selectedInterviewerId} 
             // After prop-drilling setting the setInterviewer function instead of passing only a reference
             // setInterviewer={props.setInterviewer}
+            // callback fn to trigger props.onChange when onClick occurs in InterviewListItem
             setInterviewer={() => props.onChange(interviewer.id)}
           />
         )}

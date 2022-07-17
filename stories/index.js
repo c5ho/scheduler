@@ -138,7 +138,7 @@ storiesOf("Button", module)
     .add("Selected", () => (
       <InterviewerList
         interviewers={interviewers}
-        value={3}
+        selectedInterviewerId={3}
         onChange={action("setInterviewer")}
       />
     ))
