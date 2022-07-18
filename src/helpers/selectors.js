@@ -9,9 +9,21 @@ export function getAppointmentsForDay(state, selectedDay) {
   const selectedDayAppts = selectedDayArray[0].appointments  
   const arrayOfApptObjects = selectedDayAppts.map(apptId => state.appointments[apptId])
 
-  // selectedDayAppts.forEach(apptId => state.appointments[apptId] && result.push(state.appointments[apptId]))
-
-
   return arrayOfApptObjects;
 }
 
+export function getInterview(state, interview) {
+
+  if (!interview) {
+    return null;
+  }
+
+  const selectedInterviewer = interview.interviewer;
+  
+  const interviewObject = {
+    student: interview.student,
+    interviewer: {...state.interviewers[selectedInterviewer]}
+  }
+
+  return interviewObject;
+}

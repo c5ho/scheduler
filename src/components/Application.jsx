@@ -3,7 +3,7 @@ import axios from "axios";
 import "components/Application.scss";
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview } from "helpers/selectors";
 
 export default function Application(props) {
   
@@ -33,10 +33,9 @@ export default function Application(props) {
       axios.get(appointmentsURL),
       axios.get(interviewersURL),
     ]).then((response) => {
-      console.log(response);
       const daysData = (response[0].data); 
       const appointmentsData = (response[1].data); 
-      const interviewersData = (response[2]); 
+      const interviewersData = (response[2].data); 
 
       setState(prev => ({
         ...prev, 
@@ -49,7 +48,19 @@ export default function Application(props) {
   }, [])
 
   const dailyAppointments = getAppointmentsForDay(state, state.day)
+  
+  const schedule = Object.values(dailyAppointments).map(appt => {
+    const interview = getInterview(state, appt.interview);
 
+    return (
+      <Appointment
+        key={appt.id}
+        {...appt}
+        interview={interview}
+      />
+    )
+  })
+  
   return (
     <main className="layout">
       <section className="sidebar">
@@ -73,12 +84,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {Object.values(dailyAppointments).map((appt) => 
-          <Appointment
-            key={appt.id}
-            {...appt}
-          />
-        )}
+        {schedule}   
         <Appointment key="last" time="5pm" />
       </section>
     </main>
