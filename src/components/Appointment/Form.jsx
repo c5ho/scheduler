@@ -4,10 +4,8 @@ import InterviewerList from "../InterviewerList";
 
 export default function Form(props) {
   
-  console.log(props);
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  console.log(props.student, student);
 
   const reset = () => {
     setStudent("");
@@ -18,12 +16,11 @@ export default function Form(props) {
     reset();
     props.onCancel();
   }
-  const myFunction = event => event.preventDefault()
-  
+
   return(
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off" onSubmit={myFunction}>
+        <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
           <input
             className="appointment__create-input text--semi-bold"
             name="name"
