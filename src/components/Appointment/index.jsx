@@ -6,6 +6,7 @@ import Empty from "components/Appointment/Empty";
 import Form from "components/Appointment/Form";
 import Status from "components/Appointment/Status";
 import Confirm from "components/Appointment/Confirm";
+import Error from "components/Appointment/Error";
 import useVisualMode from "hooks/useVisualMode";
 
 
@@ -18,6 +19,8 @@ export default function Appointment(props) {
   const DELETING = "DELETING";
   const CONFIRM = "CONFIRM";
   const EDIT = "EDIT";
+  const ERROR_SAVE = "ERROR_SAVE";
+  const ERROR_DELETE = "ERROR_DELETE";
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -31,27 +34,25 @@ export default function Appointment(props) {
     transition(SAVING);
     //passing interview object 'upstream' to Application.jsx
     props.bookInterview(props.id, interview)
-      .then(() => transition(SHOW));
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true));
   }
   
   const onDelete = () => {
-    transition(DELETING);
+    transition(DELETING, true);
     props.cancelInterview(props.id)
-    .then(() => transition(EMPTY));
+    .then(() => transition(EMPTY))
+    .catch(() => transition(ERROR_DELETE, true));
   }
   
   const onConfirm = () => {
     transition(CONFIRM);
   }
 
-  const onEdit = (student, interviewer) => {
-    const interviewToEdit = {
-      student, interviewer
-    }
-    console.log(student, interviewer);
+  const onEdit = () => {
     transition(EDIT);
   }
-console.log(props);
+  
   return(
     <article className="appointment">
       <Header time={props.time} />
@@ -88,6 +89,7 @@ console.log(props);
           <Confirm 
             onCancel={back}
             onConfirm={onDelete}
+            message='Are you sure you want to delete?'
           />
         )}
         {mode === SAVING && (
@@ -98,7 +100,18 @@ console.log(props);
         {mode === DELETING && (
           <Status 
              message='Deleting'
-       
+          />
+        )}
+        {mode === ERROR_SAVE && (
+          <Error 
+            message='Save Error'
+            onClose={back} 
+          />
+        )}
+        {mode === ERROR_DELETE && (
+          <Error 
+          message='Unable to Delete'
+          onClose={back} 
           />
         )}
     </article>

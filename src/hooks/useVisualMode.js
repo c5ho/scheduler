@@ -5,18 +5,19 @@ export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
 
   function transition(mode, replace = false) {
-    console.log("before:", history, mode, replace);
+    console.log("before setMode:", history, "pending state:", mode, replace);
     if (replace) {
-      const temp = [...history];
-      temp.pop();
-      setHistory(temp)
+      setHistory(prev => {
+        console.log(prev);
+        return [...prev.slice(0, -1), mode];
+      })
       console.log("if replace is true:", history)
+      return setMode(mode)
     }
     setMode(mode)
-    //setHistory([...history, mode])
-    //console.log("after:", history, mode, replace);
+
     setHistory((prev) => {
-      console.log("after:", [...prev, mode])
+      console.log("after setMode:", [...prev, mode])
       return [...prev, mode]
     })
   }
@@ -25,9 +26,7 @@ export default function useVisualMode(initial) {
     if (history.length > 1) {
       console.log(history, mode);
       setMode(history[history.length - 2]);
-      const temp = [...history];
-      temp.pop();
-      setHistory(temp)
+      return setHistory(prev => [...prev.slice(0, -1)])
     }
   }
   return { mode, transition, back };
