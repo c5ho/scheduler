@@ -14,11 +14,11 @@ export default function useVisualMode(initial) {
     }
     setMode(mode)
     //setHistory([...history, mode])
+    //console.log("after:", history, mode, replace);
     setHistory((prev) => {
       console.log("after:", [...prev, mode])
-      return [...prev, mode]})
-    //console.log("after:", history, mode, replace);
-
+      return [...prev, mode]
+    })
   }
 
   function back () {
@@ -30,6 +30,5 @@ export default function useVisualMode(initial) {
       setHistory(temp)
     }
   }
-
   return { mode, transition, back };
 }
