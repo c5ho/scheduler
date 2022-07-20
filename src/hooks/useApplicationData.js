@@ -13,9 +13,9 @@ export default function useApplicationData() {
 
   const setDay = day => setState({ ...state, day});
 
-  const appointmentsURL = `http://localhost:8001/api/appointments/`;
-  const interviewersURL = `http://localhost:8001/api/interviewers/`;
-  const daysURL = `http://localhost:8001/api/days/`;
+  const appointmentsURL = `/api/appointments/`;
+  const interviewersURL = `/api/interviewers/`;
+  const daysURL = `/api/days/`;
   
   useEffect (() => {
     
@@ -36,7 +36,7 @@ export default function useApplicationData() {
       })); 
 
     });
-  }, [])
+  }, [daysURL, appointmentsURL, interviewersURL])
 
   const bookInterview = (id, interview) => {
     //build data structure with new interview data
