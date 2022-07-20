@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { getUpdatedSpotsForDay } from "helpers/selectors";
 
 export default function useApplicationData() {
 
@@ -38,12 +39,11 @@ export default function useApplicationData() {
   }, [])
 
   const bookInterview = (id, interview) => {
-    //copy appointment data        
+    //build data structure with new interview data
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
-    //copy appointments data
     const appointments = {
       ...state.appointments,
       [id]: appointment
@@ -52,11 +52,17 @@ export default function useApplicationData() {
     //returning to props.bookInterview in index.js
     return axios.put(appointmentsURL+id, {interview})
       .then(() => {
+        
+        //get updated remaining spots for day based on new appointments data
+        const updatedDays = (getUpdatedSpotsForDay(state, appointments));
+        
+        //set updated state with new appointments and days data
         setState((prev) => ({
-          ...prev, appointments 
+          ...prev, appointments,
+          days: updatedDays
         }));
-    })
-  }
+      })
+    }
 
   const cancelInterview = (id) => {
     const appointment = {
@@ -70,10 +76,12 @@ export default function useApplicationData() {
     };
     return axios.delete(appointmentsURL+id)
       .then(() => {
+        const updatedDays = (getUpdatedSpotsForDay(state, appointments));
         setState((prev) => ({
-          ...prev, appointments 
+          ...prev, appointments,
+          days: updatedDays 
         }));
-    })
+      })
   }
   return { state, setDay, bookInterview, cancelInterview };
 }

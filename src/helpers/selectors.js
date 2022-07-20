@@ -36,4 +36,21 @@ export function getInterview(state, interview) {
   return interviewObject;
 }
 
+export function getUpdatedSpotsForDay(state, appointments) {
+    
+    const currentDayIndex = state.days.findIndex((day) => day.name === state.day);
+    
+    const currentDay = state.days[currentDayIndex];
+    
+    //show appointment IDs where interview is nulll in an array; length of array is number of spots 
+    const spots = currentDay.appointments.filter((id) => !appointments[id].interview).length;
+  
+    const updatedDayObj = { ...currentDay, spots };
+  
+    const updatedDaysArr = [...state.days];
+    updatedDaysArr[currentDayIndex] = updatedDayObj;
+  
+    return updatedDaysArr;
+  };
+
 
