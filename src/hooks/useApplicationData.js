@@ -18,7 +18,6 @@ export default function useApplicationData() {
   const daysURL = `/api/days`;
   
   useEffect (() => {
-    
     Promise.all([
       axios.get(daysURL),
       axios.get(appointmentsURL),
