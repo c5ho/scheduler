@@ -34,7 +34,7 @@ Interview scheduler is an application that allows users to book and cancel inter
 3. Start the web server using the `npm start` command. The app will be served at <http://localhost:8000/>.
 4. Go to <http://localhost:8000/> in your browser.
 
-
+5. Optionally, set up the scheduler-api with mock data using [this repo](https://github.com/lighthouse-labs/scheduler-api).
 <br>
 
 ## Screen Views
