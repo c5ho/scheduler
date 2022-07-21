@@ -13,9 +13,9 @@ export default function useApplicationData() {
 
   const setDay = day => setState({ ...state, day});
 
-  const appointmentsURL = `/api/appointments/`;
-  const interviewersURL = `/api/interviewers/`;
-  const daysURL = `/api/days/`;
+  const appointmentsURL = `/api/appointments`;
+  const interviewersURL = `/api/interviewers`;
+  const daysURL = `/api/days`;
   
   useEffect (() => {
     

@@ -5,7 +5,7 @@ export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
 
   function transition(mode, replace = false) {
-    console.log("before setMode:", history, "pending state:", mode, replace);
+    console.log("before setMode:", history, "pending state:", mode, "replace:", replace);
     if (replace) {
       setHistory(prev => {
         console.log(prev);
