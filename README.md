@@ -4,29 +4,33 @@ Interview scheduler is an application that allows users to book and cancel inter
 
 *This project was built in my web development journey at Lighthouse Labs*
 
+<br>
+
 ## Approach
 
-* Components
+* Components were built in isolation from the most basic node using Storybook and then built up in the application tree.
 
+* Appointments state data is retrieved from an API and rendered using the built components.
 
-## Setup
+* Visual state management imnplemented using a custom hook to allow create, edit, and delete functions.
 
-Install dependencies with `npm install`.
+* State and live updates is managed using advance React patterns.
 
-## Running Webpack Development Server
+<br>
 
-```sh
-npm start
-```
+## Tech Stack
 
-## Running Jest Test Framework
+* Development: Node, Storybook Webpack Dev Server, Babel
+* Database: postgreSQL
+* Testing: Jest, Cypress
 
-```sh
-npm test
-```
+<br>
 
-## Running Storybook Visual Testbed
+## Getting Started
 
-```sh
-npm run storybook
+1. [Create](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) a new repository using this repository as a template.
+2. Clone your repository onto your local device.
+3. Install dependencies using the `npm install` command.
+3. Start the web server using the `npm start` command. The app will be served at <http://localhost:8000/>.
+4. Go to <http://localhost:8000/> in your browser.
 ```
