@@ -32,88 +32,89 @@ export default function Appointment(props) {
       interviewer
     };
     transition(SAVING);
+
     //passing interview object 'upstream' to Application.jsx
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch(() => transition(ERROR_SAVE, true));
-  }
-  
+  };
+
   const onDelete = () => {
     transition(DELETING, true);
     props.cancelInterview(props.id)
-    .then(() => transition(EMPTY))
-    .catch(() => transition(ERROR_DELETE, true));
-  }
-  
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR_DELETE, true));
+  };
+
   const onConfirm = () => {
     transition(CONFIRM);
-  }
+  };
 
   const onEdit = () => {
     transition(EDIT);
-  }
-  
-  return(
-    <article className="appointment"  data-testid="appointment">
+  };
+
+  return (
+    <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
-        {mode === EMPTY && (
-          <Empty 
-            onAdd={() => transition(CREATE)}
-          />
-        )}
-        {mode === SHOW && (
-          <Show
-            student={props.interview.student}
-            interviewer={props.interview.interviewer}
-            onConfirm={onConfirm}
-            onEdit={onEdit}
-          />
-        )}
-        {mode === CREATE && (
-          <Form 
-            interviewers={props.interviewers}
-            onCancel={back}
-            onSave={save}
-          />
-        )}
-        {mode === EDIT && (
-          <Form 
-            student={props.interview.student}
-            interviewer={props.interview.interviewer.id}  
-            interviewers={props.interviewers}
-            onCancel={back}
-            onSave={save}
-          />
-        )}
-        {mode === CONFIRM && (
-          <Confirm 
-            onCancel={back}
-            onConfirm={onDelete}
-            message='Are you sure you want to delete this appointment?'
-          />
-        )}
-        {mode === SAVING && (
-          <Status 
-            message='Saving'
-          />
-        )}
-        {mode === DELETING && (
-          <Status 
-             message='Deleting'
-          />
-        )}
-        {mode === ERROR_SAVE && (
-          <Error 
-            message='Unable to Save'
-            onClose={back} 
-          />
-        )}
-        {mode === ERROR_DELETE && (
-          <Error 
+      {mode === EMPTY && (
+        <Empty
+          onAdd={() => transition(CREATE)}
+        />
+      )}
+      {mode === SHOW && (
+        <Show
+          student={props.interview.student}
+          interviewer={props.interview.interviewer}
+          onConfirm={onConfirm}
+          onEdit={onEdit}
+        />
+      )}
+      {mode === CREATE && (
+        <Form
+          interviewers={props.interviewers}
+          onCancel={back}
+          onSave={save}
+        />
+      )}
+      {mode === EDIT && (
+        <Form
+          student={props.interview.student}
+          interviewer={props.interview.interviewer.id}
+          interviewers={props.interviewers}
+          onCancel={back}
+          onSave={save}
+        />
+      )}
+      {mode === CONFIRM && (
+        <Confirm
+          onCancel={back}
+          onConfirm={onDelete}
+          message='Are you sure you want to delete this appointment?'
+        />
+      )}
+      {mode === SAVING && (
+        <Status
+          message='Saving'
+        />
+      )}
+      {mode === DELETING && (
+        <Status
+          message='Deleting'
+        />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error
+          message='Unable to Save'
+          onClose={back}
+        />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error
           message='Unable to Delete'
-          onClose={back} 
-          />
-        )}
+          onClose={back}
+        />
+      )}
     </article>
   )
-}
+};

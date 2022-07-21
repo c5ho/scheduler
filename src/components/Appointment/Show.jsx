@@ -1,7 +1,8 @@
 import React from "react";
 
+// view that shows a booked appointment with student name and interviewer in a timeslot
 export default function Show(props) {
-  return(
+  return (
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">
         <h2 className="text--regular">{props.student}</h2>
@@ -28,4 +29,4 @@ export default function Show(props) {
       </section>
     </main>
   )
-}
+};

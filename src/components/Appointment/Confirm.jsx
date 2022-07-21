@@ -1,8 +1,9 @@
 import React from "react";
 import Button from "../Button";
 
+// deletion confirmation view where user can cancel or confirm appointment deletion
 export default function Confirm(props) {
-  return(
+  return (
     <main className="appointment__card appointment__card--confirm">
       <h1 className="text--semi-bold">{props.message}</h1>
       <section className="appointment__actions">
@@ -11,4 +12,4 @@ export default function Confirm(props) {
       </section>
     </main>
   )
-}
+};
