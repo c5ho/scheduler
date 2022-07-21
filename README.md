@@ -33,4 +33,14 @@ Interview scheduler is an application that allows users to book and cancel inter
 3. Install dependencies using the `npm install` command.
 3. Start the web server using the `npm start` command. The app will be served at <http://localhost:8000/>.
 4. Go to <http://localhost:8000/> in your browser.
-```
+
+
+<br>
+
+## Screen Views
+
+*Booking, editing, and deleting flows with live update of remaining timeslots:*
+!["Booking, editing, and deleting flows:"](https://github.com/c5ho/scheduler/blob/master/docs/scheduler_flow.gif?raw=true)
+
+*Error handling in saving and deleting flows:*
+!["Error handling in saving and deleting flows:"](https://github.com/c5ho/scheduler/blob/master/docs/scheduler_error.gif?raw=true)
