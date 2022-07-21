@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { getUpdatedSpotsForDay } from "helpers/selectors";
 
@@ -34,12 +34,11 @@ export default function useApplicationData() {
         appointments: appointmentsData,
         interviewers : interviewersData
       })); 
-
     });
-  }, [daysURL, appointmentsURL, interviewersURL])
+  }, [daysURL, appointmentsURL, interviewersURL]);
 
   const bookInterview = (id, interview) => {
-    //build data structure with new interview data
+    //build new appointment and appointments data structure with new interview data
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -60,28 +59,29 @@ export default function useApplicationData() {
         setState((prev) => ({
           ...prev, appointments,
           days: updatedDays
-        }));
+        }))
       })
-    }
+  };
 
   const cancelInterview = (id) => {
     const appointment = {
       ...state.appointments[id],
       interview: null
     };
-    console.log(appointment.interview);
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
+ 
     return axios.delete(`${appointmentsURL}/${id}`)
       .then(() => {
         const updatedDays = (getUpdatedSpotsForDay(state, appointments));
         setState((prev) => ({
           ...prev, appointments,
           days: updatedDays 
-        }));
+        }))
       })
-  }
+  };
+  
   return { state, setDay, bookInterview, cancelInterview };
-}
+};

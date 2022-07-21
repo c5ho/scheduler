@@ -2,20 +2,21 @@ import React from "react";
 import classNames from "classnames";
 import "components/Button.scss";
 
+// button component for all the forms and views
 export default function Button(props) {
-  
+
   const buttonClass = classNames("button", {
-    " button--confirm" : props.confirm, 
-    " button--danger" : props.danger 
+    " button--confirm": props.confirm,
+    " button--danger": props.danger
   });
 
   return (
-    <button 
-      className={buttonClass} 
+    <button
+      className={buttonClass}
       onClick={props.onClick}
       disabled={props.disabled}
     >
       {props.children}
     </button>
-  );
-}
+  )
+};

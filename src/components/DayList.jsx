@@ -2,19 +2,19 @@ import React from 'react';
 import DayListItem from "components/DayListItem";
 
 
+// left nav bar component that shows list of available days to schedule
 export default function DayList(props) {
-
   return (
     <ul>
-      {props.days.map((day) => 
-        <DayListItem 
+      {props.days.map((day) =>
+        <DayListItem
           key={day.id}
-          name={day.name} 
-          spots={day.spots} 
+          name={day.name}
+          spots={day.spots}
           selected={day.name === props.value}
-          setDay={props.onChange}  
+          setDay={props.onChange}
         />
       )}
     </ul>
-  );
-}
+  )
+};

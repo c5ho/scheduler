@@ -5,29 +5,35 @@ export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
 
   function transition(mode, replace = false) {
-    console.log("before setMode:", history, "pending state:", mode, "replace:", replace);
+
+    // if the previous view needs to be skipped
     if (replace) {
       setHistory(prev => {
-        console.log(prev);
+        
+        //remove last view from history before adding next pending view
         return [...prev.slice(0, -1), mode];
       })
-      console.log("if replace is true:", history)
       return setMode(mode)
-    }
-    setMode(mode)
+    };
 
+    // if previous view does not need replacing, set next view and add view to history
+    setMode(mode)
     setHistory((prev) => {
-      console.log("after setMode:", [...prev, mode])
-      return [...prev, mode]
+    return [...prev, mode]
     })
-  }
+  };
 
   function back () {
+    
+    // check to make sure can only move backwards if there is a state to go back to
     if (history.length > 1) {
-      console.log(history, mode);
+      
+      //setMode to previous view in history
       setMode(history[history.length - 2]);
+      
+      //remove last view from history
       return setHistory(prev => [...prev.slice(0, -1)])
-    }
-  }
+    };
+  };
   return { mode, transition, back };
-}
+};
