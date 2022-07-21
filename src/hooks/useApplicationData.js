@@ -50,7 +50,7 @@ export default function useApplicationData() {
     };
     
     //returning to props.bookInterview in index.js
-    return axios.put(appointmentsURL+id, {interview})
+    return axios.put(`${appointmentsURL}/${id}`, {interview})
       .then(() => {
         
         //get updated remaining spots for day based on new appointments data
@@ -74,7 +74,7 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    return axios.delete(appointmentsURL+id)
+    return axios.delete(`${appointmentsURL}/${id}`)
       .then(() => {
         const updatedDays = (getUpdatedSpotsForDay(state, appointments));
         setState((prev) => ({

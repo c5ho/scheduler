@@ -89,7 +89,7 @@ export default function Appointment(props) {
           <Confirm 
             onCancel={back}
             onConfirm={onDelete}
-            message='Are you sure you want to delete?'
+            message='Are you sure you want to delete this appointment?'
           />
         )}
         {mode === SAVING && (
