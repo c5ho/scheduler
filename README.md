@@ -26,12 +26,12 @@ Interview scheduler is an application that allows users to book and cancel inter
 
 <br>
 
-## Getting Started
+## Setup
 
 1. [Create](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) a new repository using this repository as a template.
 2. Clone your repository onto your local device.
 3. Install dependencies using the `npm install` command.
-3. Start the web server using the `npm start` command. The app will be served at <http://localhost:8000/>.
+3. Start the Webpack Development Server using the `npm start` command. The app will be served at <http://localhost:8000/>.
 4. Go to <http://localhost:8000/> in your browser.
 
 5. Optionally, set up the scheduler-api with mock data using [this repo](https://github.com/lighthouse-labs/scheduler-api).
